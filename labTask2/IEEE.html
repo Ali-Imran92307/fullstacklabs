@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>IEEE Conference Paper Template</title>
+	<style>
+		:root {
+			--navy: #13263f;
+			--blue: #2165a7;
+			--ink: #20252b;
+			--muted: #647181;
+			--paper: #ffffff;
+			--canvas: #e7ebef;
+			--line: #cdd4db;
+			--pale-blue: #eef5fb;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: var(--canvas);
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 10px;
+			line-height: 1.35;
+		}
+
+		.editor-bar {
+			min-height: 64px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			padding: 12px clamp(18px, 5vw, 80px);
+			color: #fff;
+			background: var(--navy);
+		}
+
+		.editor-brand {
+			display: flex;
+			align-items: center;
+			gap: 11px;
+			font-size: 14px;
+			font-weight: 700;
+		}
+
+		.ieee-mark {
+			width: 32px;
+			height: 32px;
+			display: grid;
+			place-items: center;
+			border: 1px solid rgba(255,255,255,.65);
+			border-radius: 4px;
+			font-size: 9px;
+			letter-spacing: .4px;
+		}
+
+		.editor-meta {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			color: #bdcad8;
+			font-size: 11px;
+		}
+
+		.status {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 6px 9px;
+			color: #d8f2e2;
+			background: rgba(69, 174, 108, .17);
+			border-radius: 3px;
+		}
+
+		.status::before {
+			width: 6px;
+			height: 6px;
+			content: "";
+			background: #65d78b;
+			border-radius: 50%;
+		}
+
+		.paper {
+			width: min(100% - 36px, 920px);
+			min-height: 1120px;
+			margin: 34px auto 60px;
+			padding: 51px 65px 58px;
+			background: var(--paper);
+			box-shadow: 0 3px 17px rgba(29, 42, 56, .15);
+		}
+
+		.paper-header {
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			padding-bottom: 8px;
+			border-bottom: 1px solid #222;
+			color: #4b5660;
+			font-size: 8px;
+			letter-spacing: .2px;
+			text-transform: uppercase;
+		}
+
+		.paper-header strong { color: var(--blue); }
+
+		.title-block {
+			padding: 42px 20px 26px;
+			text-align: center;
+		}
+
+		.title-block h1 {
+			max-width: 700px;
+			margin: 0 auto 17px;
+			color: #151a1f;
+			font-family: "Times New Roman", Times, serif;
+			font-size: clamp(25px, 4vw, 34px);
+			font-weight: 700;
+			line-height: 1.12;
+		}
+
+		.authors {
+			margin: 0;
+			color: #343b43;
+			font-size: 11px;
+			line-height: 1.6;
+		}
+
+		.authors strong { font-size: 12px; }
+
+		.paper-info {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 8px 20px;
+			margin-top: 15px;
+			color: var(--muted);
+			font-size: 9px;
+		}
+
+		.paper-info span::before {
+			margin-right: 5px;
+			color: var(--blue);
+			content: "◆";
+			font-size: 6px;
+			vertical-align: 1px;
+		}
+
+		.abstract {
+			margin: 0 0 23px;
+			padding: 13px 15px 12px;
+			background: var(--pale-blue);
+			border-left: 3px solid var(--blue);
+			text-align: justify;
+		}
+
+		.abstract p { margin: 0; }
+		.abstract strong { color: var(--navy); }
+
+		.keywords {
+			display: block;
+			margin-top: 7px !important;
+			color: #526274;
+			font-size: 9px;
+		}
+
+		.keywords strong { color: var(--ink); }
+
+		.columns {
+			column-count: 2;
+			column-gap: 27px;
+			text-align: justify;
+		}
+
+		.columns section,
+		.columns figure,
+		.columns .equation {
+			break-inside: avoid;
+		}
+
+		.section-title {
+			margin: 0 0 7px;
+			color: #10161b;
+			font-family: "Times New Roman", Times, serif;
+			font-size: 12px;
+			font-weight: 700;
+			line-height: 1.2;
+			text-align: left;
+			text-transform: uppercase;
+		}
+
+		.section-title span { color: var(--blue); }
+
+		.columns p { margin: 0 0 9px; }
+
+		.columns ol,
+		.columns ul {
+			margin: 4px 0 10px 18px;
+			padding: 0;
+		}
+
+		.columns li { margin-bottom: 3px; }
+
+		.equation {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin: 13px 0;
+			padding: 9px 8px;
+			background: #f6f8fa;
+			border-top: 1px solid var(--line);
+			border-bottom: 1px solid var(--line);
+			font-family: "Times New Roman", Times, serif;
+			font-size: 13px;
+			font-style: italic;
+			text-align: center;
+		}
+
+		.equation-number {
+			margin-left: auto;
+			color: var(--muted);
+			font-family: Arial, sans-serif;
+			font-size: 9px;
+			font-style: normal;
+		}
+
+		figure {
+			margin: 14px 0 12px;
+			text-align: center;
+		}
+
+		.figure-art {
+			height: 112px;
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+			gap: 15px;
+			padding: 14px 20px 0;
+			background: linear-gradient(135deg, #eff5fb, #dce9f4);
+			border: 1px solid #c8d8e6;
+		}
+
+		.figure-art span {
+			width: 24px;
+			display: block;
+			background: var(--blue);
+			border-radius: 3px 3px 0 0;
+		}
+
+		.figure-art span:nth-child(1) { height: 39%; opacity: .5; }
+		.figure-art span:nth-child(2) { height: 67%; opacity: .72; }
+		.figure-art span:nth-child(3) { height: 87%; }
+		.figure-art span:nth-child(4) { height: 55%; opacity: .62; }
+		.figure-art span:nth-child(5) { height: 77%; opacity: .83; }
+
+		figcaption {
+			margin-top: 6px;
+			font-size: 9px;
+			text-align: center;
+		}
+
+		.references {
+			margin-top: 24px;
+			padding-top: 10px;
+			border-top: 1px solid #222;
+		}
+
+		.references .section-title { margin-bottom: 8px; }
+
+		.reference-list {
+			display: grid;
+			gap: 5px;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			counter-reset: reference;
+		}
+
+		.reference-list li {
+			display: grid;
+			grid-template-columns: 28px 1fr;
+			gap: 3px;
+			font-size: 9px;
+			text-align: left;
+		}
+
+		.reference-list li::before {
+			counter-increment: reference;
+			content: "[" counter(reference) "]";
+		}
+
+		.paper-footer {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 35px;
+			padding-top: 8px;
+			border-top: 1px solid #222;
+			color: #4b5660;
+			font-size: 8px;
+		}
+
+		@media (max-width: 720px) {
+			.editor-meta { display: none; }
+			.paper { width: calc(100% - 24px); margin: 12px auto 25px; padding: 35px 25px; }
+			.columns { column-count: 1; }
+			.title-block { padding-right: 0; padding-left: 0; }
+		}
+
+		@media print {
+			body { background: #fff; }
+			.editor-bar { display: none; }
+			.paper { width: 100%; margin: 0; padding: 45px 65px; box-shadow: none; }
+		}
+	</style>
+</head>
+<body>
+	<header class="editor-bar">
+		<div class="editor-brand"><span class="ieee-mark">IEEE</span> Conference paper template</div>
+		<div class="editor-meta"><span>Document ID: CONF-2026-014</span><span class="status">Ready for review</span></div>
+	</header>
+
+	<article class="paper">
+		<header class="paper-header">
+			<span>2026 International Conference on Intelligent Systems</span>
+			<strong>IEEE · Student Research Track</strong>
+		</header>
+
+		<section class="title-block">
+			<h1>Designing Human-Centered Interfaces for Adaptive Learning Systems</h1>
+			<p class="authors"><strong>Alex Morgan</strong>, <strong>Priya Shah</strong>, and <strong>Daniel Kim</strong><br>Department of Computer Science, Northbridge University, New York, USA</p>
+			<div class="paper-info">
+				<span>alex.morgan@northbridge.edu</span>
+				<span>Paper ID: 014</span>
+				<span>Track: Human–Computer Interaction</span>
+			</div>
+		</section>
+
+		<section class="abstract">
+			<p><strong>Abstract—</strong> Adaptive learning systems increasingly rely on interface decisions to translate complex learner data into clear, actionable feedback. This paper presents a lightweight interaction framework that combines progressive disclosure, contextual prompts, and transparent recommendation explanations. A mixed-method evaluation with 42 participants indicates that the proposed framework improves task confidence while preserving completion speed.</p>
+			<p class="keywords"><strong>Index Terms—</strong> adaptive systems, human–computer interaction, learning analytics, interface design, explainable recommendations.</p>
+		</section>
+
+		<div class="columns">
+			<section>
+				<h2 class="section-title"><span>I.</span> Introduction</h2>
+				<p>Digital learning environments collect a growing volume of information about learner behavior. Yet the presence of data does not guarantee that learners can understand or act upon it. Poorly structured feedback can increase cognitive load and reduce trust in an otherwise useful system.</p>
+				<p>We investigate how interface structure can make adaptive recommendations more legible. Our work focuses on three research questions: how feedback should be layered, how system reasoning should be exposed, and which interaction patterns support confident action.</p>
+			</section>
+
+			<section>
+				<h2 class="section-title"><span>II.</span> Related Work</h2>
+				<p>Research in intelligent tutoring systems has explored personalized sequencing, mastery estimation, and automated hints. Recent work has shifted attention toward learner agency and the interpretability of algorithmic decisions.</p>
+				<p>Our approach builds on these findings by treating the interface as an active part of the recommendation system rather than a passive presentation layer. This position is consistent with prior studies on explanation quality and user control.</p>
+			</section>
+
+			<section>
+				<h2 class="section-title"><span>III.</span> Proposed Framework</h2>
+				<p>The framework organizes feedback into three layers. The first layer presents an immediate next action. The second gives a short explanation of the recommendation. The third exposes optional evidence for learners who want to inspect the underlying signal.</p>
+				<div class="equation">C = αA + βE + γU <span class="equation-number">(1)</span></div>
+				<p>Here, <em>C</em> represents perceived clarity, while <em>A</em>, <em>E</em>, and <em>U</em> represent actionability, explanation quality, and user control, respectively. Weights were calibrated during a pilot study.</p>
+			</section>
+
+			<figure>
+				<div class="figure-art" role="img" aria-label="Bar chart showing interface clarity scores across five trials"><span></span><span></span><span></span><span></span><span></span></div>
+				<figcaption>Fig. 1. Clarity score across the five evaluation trials.</figcaption>
+			</figure>
+
+			<section>
+				<h2 class="section-title"><span>IV.</span> Methodology</h2>
+				<p>We conducted a controlled usability study with 42 participants divided into a baseline group and an adaptive-interface group. Participants completed a sequence of information-seeking tasks and rated their confidence after each task.</p>
+				<ol>
+					<li>Review a recommended learning objective.</li>
+					<li>Inspect the supporting explanation.</li>
+					<li>Select and complete the next activity.</li>
+				</ol>
+				<p>Completion time, error rate, and perceived confidence were recorded. Semi-structured interviews were then used to identify recurring expectations and points of friction.</p>
+			</section>
+
+			<section>
+				<h2 class="section-title"><span>V.</span> Results</h2>
+				<p>Participants using the proposed interface completed tasks with a comparable median time and reported higher confidence than the baseline group. The largest improvement occurred in tasks where a recommendation required additional context.</p>
+				<p>The results suggest that explanation controls are most effective when they remain close to the recommended action. Moving explanations into a separate help area increased navigation effort and reduced engagement.</p>
+			</section>
+
+			<section>
+				<h2 class="section-title"><span>VI.</span> Discussion</h2>
+				<p>These findings reinforce the importance of designing explanations as part of the primary interaction. The framework does not attempt to expose every model detail; instead, it prioritizes the smallest amount of information needed to support a meaningful decision.</p>
+			</section>
+
+			<section>
+				<h2 class="section-title"><span>VII.</span> Conclusion</h2>
+				<p>This paper introduced a human-centered framework for adaptive learning interfaces. Future work will evaluate the framework over longer periods and examine how explanation preferences change as learner familiarity increases.</p>
+			</section>
+		</div>
+
+		<section class="references">
+			<h2 class="section-title">References</h2>
+			<ol class="reference-list">
+				<li>J. Nielsen, <em>Usability Engineering</em>. San Francisco, CA, USA: Morgan Kaufmann, 1994.</li>
+				<li>A. Holzinger, “Human-centered AI and machine learning,” <em>IEEE Intelligent Systems</em>, vol. 36, no. 2, pp. 5–7, 2021.</li>
+				<li>R. R. R. da Silva et al., “Explainable recommendations in educational systems,” in <em>Proc. IEEE ICALT</em>, 2024, pp. 112–118.</li>
+			</ol>
+		</section>
+
+		<footer class="paper-footer">
+			<span>IEEE CONF 2026 · Student Research Track</span>
+			<span>1</span>
+		</footer>
+	</article>
+</body>
+</html>

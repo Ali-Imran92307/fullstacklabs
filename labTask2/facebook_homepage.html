@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Facebook - log in or sign up</title>
+	<style>
+		:root {
+			--facebook-blue: #1877f2;
+			--facebook-deep: #145dcc;
+			--ink: #1c1e21;
+			--muted: #606770;
+			--line: #dadde1;
+			--page: #f0f2f5;
+			--white: #ffffff;
+			--success: #42b72a;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: var(--page);
+			font-family: "Trebuchet MS", Arial, sans-serif;
+		}
+
+		.topbar {
+			height: 76px;
+			display: flex;
+			align-items: center;
+			padding: 0 6vw;
+			background: var(--white);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			color: var(--facebook-blue);
+			font-size: 28px;
+			font-weight: 800;
+			letter-spacing: -1.5px;
+			text-decoration: none;
+		}
+
+		.brand-mark {
+			width: 34px;
+			height: 34px;
+			display: grid;
+			place-items: end center;
+			overflow: hidden;
+			color: var(--white);
+			background: var(--facebook-blue);
+			border-radius: 50%;
+			font-family: Georgia, serif;
+			font-size: 35px;
+			font-weight: bold;
+			line-height: 31px;
+		}
+
+		.topbar-link {
+			margin-left: auto;
+			color: var(--facebook-blue);
+			font-size: 14px;
+			font-weight: 700;
+			text-decoration: none;
+		}
+
+		.page {
+			min-height: calc(100vh - 76px);
+			display: grid;
+			grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.8fr);
+			align-items: center;
+			gap: clamp(48px, 9vw, 150px);
+			max-width: 1180px;
+			margin: 0 auto;
+			padding: 72px 6vw 90px;
+		}
+
+		.intro {
+			max-width: 590px;
+		}
+
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			margin: 0 0 22px;
+			color: var(--facebook-blue);
+			font-size: 13px;
+			font-weight: 800;
+			letter-spacing: 1.6px;
+			text-transform: uppercase;
+		}
+
+		.eyebrow::before {
+			content: "";
+			width: 28px;
+			height: 2px;
+			background: var(--facebook-blue);
+		}
+
+		h1 {
+			max-width: 560px;
+			margin: 0 0 22px;
+			color: var(--ink);
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(47px, 6vw, 78px);
+			font-weight: 500;
+			letter-spacing: -4px;
+			line-height: 0.98;
+		}
+
+		h1 span {
+			color: var(--facebook-blue);
+		}
+
+		.intro-copy {
+			max-width: 480px;
+			margin: 0;
+			color: var(--muted);
+			font-size: 19px;
+			line-height: 1.55;
+		}
+
+		.community-note {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			margin-top: 42px;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		.avatar-stack {
+			display: flex;
+			padding-left: 7px;
+		}
+
+		.avatar {
+			width: 34px;
+			height: 34px;
+			margin-left: -7px;
+			display: grid;
+			place-items: center;
+			color: var(--white);
+			border: 3px solid var(--page);
+			border-radius: 50%;
+			font-size: 11px;
+			font-weight: 800;
+		}
+
+		.avatar:nth-child(1) { background: #e7a83e; }
+		.avatar:nth-child(2) { background: #d36b71; }
+		.avatar:nth-child(3) { background: #5196c8; }
+
+		.login-wrap {
+			width: 100%;
+			max-width: 410px;
+			justify-self: end;
+		}
+
+		.login-card {
+			padding: 28px;
+			background: var(--white);
+			border: 1px solid rgba(0, 0, 0, 0.08);
+			border-radius: 12px;
+			box-shadow: 0 10px 26px rgba(33, 47, 62, 0.1);
+		}
+
+		.login-card h2 {
+			margin: 0 0 6px;
+			font-size: 22px;
+			font-weight: 800;
+		}
+
+		.login-card .subheading {
+			margin: 0 0 22px;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		.field {
+			width: 100%;
+			height: 52px;
+			margin-bottom: 12px;
+			padding: 0 16px;
+			color: var(--ink);
+			background: #fff;
+			border: 1px solid #ccd0d5;
+			border-radius: 7px;
+			outline: none;
+			font: inherit;
+			font-size: 15px;
+		}
+
+		.field:focus {
+			border-color: var(--facebook-blue);
+			box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.16);
+		}
+
+		.login-button,
+		.create-button {
+			width: 100%;
+			border: 0;
+			border-radius: 7px;
+			color: var(--white);
+			cursor: pointer;
+			font: inherit;
+			font-weight: 800;
+			transition: transform 160ms ease, background 160ms ease;
+		}
+
+		.login-button {
+			height: 50px;
+			background: var(--facebook-blue);
+			font-size: 17px;
+		}
+
+		.login-button:hover { background: var(--facebook-deep); }
+
+		.create-button {
+			width: auto;
+			min-width: 176px;
+			height: 46px;
+			padding: 0 20px;
+			background: var(--success);
+			font-size: 14px;
+		}
+
+		.login-button:hover,
+		.create-button:hover { transform: translateY(-1px); }
+
+		.forgot-link {
+			display: block;
+			margin: 17px 0 22px;
+			color: var(--facebook-blue);
+			font-size: 13px;
+			font-weight: 700;
+			text-align: center;
+			text-decoration: none;
+		}
+
+		.forgot-link:hover,
+		.topbar-link:hover { text-decoration: underline; }
+
+		.divider {
+			height: 1px;
+			margin: 0 0 22px;
+			background: var(--line);
+		}
+
+		.create-area { text-align: center; }
+
+		.create-area p {
+			margin: 14px 0 0;
+			color: var(--muted);
+			font-size: 12px;
+		}
+
+		.create-area strong { color: var(--ink); }
+
+		.footer {
+			padding: 28px 6vw 34px;
+			color: #73777d;
+			background: var(--white);
+			border-top: 1px solid var(--line);
+			font-size: 12px;
+		}
+
+		.footer-inner {
+			max-width: 1180px;
+			margin: 0 auto;
+		}
+
+		.language-list,
+		.footer-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 14px 18px;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.language-list { margin-bottom: 18px; }
+
+		.footer a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		.footer a:hover { text-decoration: underline; }
+
+		.copyright {
+			margin: 24px 0 0;
+			color: #8a8d91;
+		}
+
+		@media (max-width: 780px) {
+			.topbar { height: 68px; padding: 0 22px; }
+			.page {
+				min-height: auto;
+				grid-template-columns: 1fr;
+				gap: 46px;
+				padding: 58px 22px 70px;
+			}
+			.intro { max-width: 580px; }
+			h1 { font-size: clamp(46px, 13vw, 70px); }
+			.login-wrap { justify-self: stretch; max-width: 480px; }
+			.footer { padding-right: 22px; padding-left: 22px; }
+		}
+
+		@media (max-width: 420px) {
+			.brand { font-size: 24px; }
+			.brand-mark { width: 30px; height: 30px; font-size: 31px; line-height: 28px; }
+			.topbar-link { font-size: 12px; }
+			.login-card { padding: 22px 18px; }
+			.community-note { align-items: flex-start; }
+		}
+	</style>
+	<style>
+		html, body { min-height: 100%; }
+
+		body {
+			background: #fff;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		.reference-page {
+			min-height: 100vh;
+			display: grid;
+			grid-template-columns: minmax(0, 58%) minmax(420px, 42%);
+		}
+
+		.showcase {
+			position: relative;
+			min-height: 100vh;
+			overflow: hidden;
+			padding: 48px 4.2vw 50px;
+			border-right: 2px solid #e5e5e5;
+		}
+
+		.reference-logo {
+			width: 68px;
+			height: 68px;
+			display: grid;
+			place-items: end center;
+			overflow: hidden;
+			color: #fff;
+			background: #0866ff;
+			border-radius: 50%;
+			font-family: Arial, sans-serif;
+			font-size: 71px;
+			font-weight: bold;
+			line-height: 62px;
+		}
+
+		.showcase h1 {
+			position: absolute;
+			z-index: 2;
+			left: 4.2vw;
+			bottom: 76px;
+			width: 285px;
+			margin: 0;
+			color: #050505;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: clamp(48px, 5.1vw, 78px);
+			font-weight: 800;
+			letter-spacing: -4px;
+			line-height: .96;
+		}
+
+		.showcase h1 span { color: #0866ff; }
+
+		.collage {
+			position: absolute;
+			top: 8.5%;
+			left: 36%;
+			width: min(480px, 53%);
+			height: 600px;
+		}
+
+		.collage-card {
+			position: absolute;
+			overflow: hidden;
+			background: #dce8f5;
+			border: 6px solid #fff;
+			border-radius: 16px;
+			box-shadow: 0 3px 9px rgba(0, 0, 0, .16);
+		}
+
+		.collage-card img {
+			width: 100%;
+			height: 100%;
+			display: block;
+			object-fit: cover;
+		}
+
+		.portrait {
+			top: 8px;
+			right: 15px;
+			width: 260px;
+			height: 430px;
+			border-color: #c6d6ef;
+		}
+
+		.portrait img { object-position: center top; }
+
+		.plant {
+			top: 112px;
+			left: 0;
+			width: 205px;
+			height: 236px;
+			transform: rotate(-1deg);
+		}
+
+		.skate {
+			z-index: 3;
+			top: 305px;
+			left: 55px;
+			width: 185px;
+			height: 240px;
+		}
+
+		.skate img { object-position: center; }
+
+		.profile {
+			z-index: 4;
+			right: 76px;
+			bottom: 39px;
+			width: 142px;
+			height: 142px;
+			border: 6px solid #0866ff;
+			border-radius: 50%;
+		}
+
+		.reaction {
+			position: absolute;
+			z-index: 5;
+			right: 0;
+			top: 365px;
+			width: 70px;
+			height: 70px;
+			display: grid;
+			place-items: center;
+			color: #fff;
+			background: #f52364;
+			border: 5px solid #fff;
+			border-radius: 50%;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
+			font-size: 38px;
+			line-height: 1;
+		}
+
+		.smile {
+			position: absolute;
+			top: 45px;
+			left: -34px;
+			z-index: 5;
+			font-size: 51px;
+			filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .12));
+		}
+
+		.story-bar {
+			position: absolute;
+			top: 25px;
+			left: 19px;
+			right: 19px;
+			height: 5px;
+			border-radius: 10px;
+			background: rgba(255,255,255,.85);
+		}
+
+		.login-panel {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 40px clamp(40px, 7vw, 100px);
+		}
+
+		.reference-form {
+			width: min(100%, 610px);
+		}
+
+		.reference-form h2 {
+			margin: 0 0 27px;
+			color: #090909;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 22px;
+			font-weight: 700;
+			letter-spacing: 0;
+		}
+
+		.reference-field {
+			width: 100%;
+			height: 67px;
+			display: block;
+			margin: 0 0 14px;
+			padding: 0 19px;
+			color: #101010;
+			background: #fff;
+			border: 1px solid #919191;
+			border-radius: 17px;
+			outline: none;
+			font: inherit;
+			font-size: 15px;
+		}
+
+		.reference-field:focus {
+			border-color: #0866ff;
+			box-shadow: 0 0 0 2px rgba(8, 102, 255, .12);
+		}
+
+		.reference-login {
+			width: 100%;
+			height: 50px;
+			margin-top: 12px;
+			color: #fff;
+			background: #0866ff;
+			border: 0;
+			border-radius: 30px;
+			cursor: pointer;
+			font: inherit;
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		.reference-login:hover { background: #0758d8; }
+
+		.reference-forgot {
+			display: block;
+			margin: 29px 0 73px;
+			color: #050505;
+			font-size: 16px;
+			font-weight: 700;
+			text-align: center;
+			text-decoration: none;
+		}
+
+		.reference-forgot:hover { text-decoration: underline; }
+
+		.reference-create {
+			width: 100%;
+			height: 50px;
+			color: #0866ff;
+			background: #fff;
+			border: 1px solid #0866ff;
+			border-radius: 30px;
+			cursor: pointer;
+			font: inherit;
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		.reference-create:hover { background: #f3f7ff; }
+
+		.meta {
+			display: block;
+			margin-top: 29px;
+			color: #263238;
+			font-size: 18px;
+			text-align: center;
+		}
+
+		.meta::first-letter { color: #0866ff; }
+
+		.reference-footer { display: none; }
+
+		@media (max-width: 900px) {
+			.reference-page { grid-template-columns: 1fr; }
+			.showcase {
+				min-height: 680px;
+				border-right: 0;
+				border-bottom: 2px solid #e5e5e5;
+			}
+			.login-panel { min-height: 600px; padding: 60px 8vw; }
+			.collage { left: 38%; }
+			.showcase h1 { bottom: 50px; }
+		}
+
+		@media (max-width: 560px) {
+			.showcase { min-height: 580px; padding: 27px 24px; }
+			.reference-logo { width: 48px; height: 48px; font-size: 50px; line-height: 45px; }
+			.collage { top: 100px; left: 32%; width: 62%; height: 390px; }
+			.portrait { width: 150px; height: 270px; }
+			.plant { top: 78px; width: 120px; height: 145px; }
+			.skate { top: 195px; left: 25px; width: 125px; height: 165px; }
+			.profile { right: 27px; bottom: 0; width: 92px; height: 92px; }
+			.reaction { top: 240px; width: 53px; height: 53px; font-size: 28px; }
+			.smile { top: 20px; left: -22px; font-size: 35px; }
+			.showcase h1 { left: 24px; bottom: 36px; width: 190px; font-size: 43px; letter-spacing: -2px; }
+			.login-panel { min-height: 540px; padding: 42px 24px; }
+			.reference-field { height: 58px; border-radius: 14px; }
+			.reference-forgot { margin-bottom: 52px; }
+		}
+	</style>
+</head>
+<body>
+	<main class="reference-page">
+		<section class="showcase" aria-labelledby="showcase-heading">
+			<div class="reference-logo" aria-label="Facebook">f</div>
+			<div class="collage" aria-hidden="true">
+				<div class="smile">😄</div>
+				<div class="collage-card plant"><img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="Green plant"></div>
+				<div class="collage-card portrait">
+					<div class="story-bar"></div>
+					<img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&amp;fit=crop&amp;w=600&amp;q=85" alt="Woman smiling at the camera">
+				</div>
+				<div class="collage-card skate"><img src="https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="Skate park"></div>
+				<div class="collage-card profile"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&amp;fit=crop&amp;w=400&amp;q=85" alt="Profile photo"></div>
+				<div class="reaction">♥</div>
+			</div>
+			<h1 id="showcase-heading">Explore<br>the things<br><span>you love.</span></h1>
+		</section>
+
+		<section class="login-panel" aria-labelledby="login-heading">
+			<div class="reference-form">
+				<h2 id="login-heading">Log in to Facebook</h2>
+				<form action="#" method="post">
+					<label for="email" class="sr-only">Email address or mobile number</label>
+					<input class="reference-field" id="email" name="email" type="text" placeholder="Email address or mobile number" autocomplete="username" required>
+					<label for="password" class="sr-only">Password</label>
+					<input class="reference-field" id="password" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+					<button class="reference-login" type="submit">Log in</button>
+				</form>
+				<a class="reference-forgot" href="#">Forgotten password?</a>
+				<button class="reference-create" type="button">Create new account</button>
+				<span class="meta" aria-label="Meta">∞ Meta</span>
+			</div>
+		</section>
+	</main>
+
+	<style>
+		.sr-only {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+	</style>
+</body>
+</html>

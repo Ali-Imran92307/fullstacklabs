@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculator</title>
+	<style>
+		:root {
+			--bg-1: #0f172a;
+			--bg-2: #111827;
+			--panel: rgba(15, 23, 42, 0.88);
+			--panel-border: rgba(255, 255, 255, 0.10);
+			--display: #e5eefc;
+			--display-dim: rgba(229, 238, 252, 0.66);
+			--key: #1f2937;
+			--key-hover: #293548;
+			--key-text: #f8fafc;
+			--accent: #f59e0b;
+			--accent-hover: #fbbf24;
+			--shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			display: grid;
+			place-items: center;
+			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			background:
+				radial-gradient(circle at top, rgba(245, 158, 11, 0.15), transparent 28%),
+				radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 30%),
+				linear-gradient(160deg, var(--bg-1), var(--bg-2));
+			color: var(--key-text);
+			padding: 24px;
+		}
+
+		.calculator {
+			width: min(100%, 380px);
+			padding: 22px;
+			border-radius: 28px;
+			background: linear-gradient(180deg, rgba(17, 24, 39, 0.95), rgba(15, 23, 42, 0.92));
+			border: 1px solid var(--panel-border);
+			box-shadow: var(--shadow);
+			backdrop-filter: blur(14px);
+		}
+
+		.display {
+			padding: 24px 18px 18px;
+			border-radius: 22px;
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			margin-bottom: 18px;
+			text-align: right;
+			overflow: hidden;
+		}
+
+		.history {
+			min-height: 20px;
+			font-size: 0.9rem;
+			color: var(--display-dim);
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		.current {
+			margin-top: 10px;
+			font-size: clamp(2.2rem, 8vw, 3.4rem);
+			font-weight: 700;
+			line-height: 1.1;
+			color: var(--display);
+			word-break: break-all;
+		}
+
+		.keys {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.key {
+			border: 0;
+			min-height: 68px;
+			border-radius: 18px;
+			background: linear-gradient(180deg, var(--key), #16202c);
+			color: var(--key-text);
+			font-size: 1.15rem;
+			font-weight: 600;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+			cursor: pointer;
+			transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+		}
+
+		.key:hover {
+			background: linear-gradient(180deg, var(--key-hover), #1f2a39);
+			transform: translateY(-1px);
+		}
+
+		.key:active {
+			transform: translateY(1px) scale(0.99);
+			box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.24);
+		}
+
+		.key.function {
+			color: #cbd5e1;
+			background: linear-gradient(180deg, #334155, #243041);
+		}
+
+		.key.operator {
+			background: linear-gradient(180deg, var(--accent), #d97706);
+			color: #111827;
+		}
+
+		.key.operator:hover {
+			background: linear-gradient(180deg, var(--accent-hover), #ea8b0b);
+		}
+
+		.key.span-2 {
+			grid-column: span 2;
+		}
+
+		@media (max-width: 420px) {
+			.calculator {
+				padding: 18px;
+				border-radius: 24px;
+			}
+
+			.keys {
+				gap: 10px;
+			}
+
+			.key {
+				min-height: 60px;
+				border-radius: 16px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="calculator" aria-label="Calculator">
+		<section class="display" aria-live="polite" aria-atomic="true">
+			<div class="history"></div>
+			<div class="current">0</div>
+		</section>
+
+		<section class="keys" aria-label="Calculator keys">
+			<button class="key function" type="button">AC</button>
+			<button class="key function" type="button">DEL</button>
+			<button class="key function" type="button">%</button>
+			<button class="key operator" type="button">÷</button>
+
+			<button class="key" type="button">7</button>
+			<button class="key" type="button">8</button>
+			<button class="key" type="button">9</button>
+			<button class="key operator" type="button">×</button>
+
+			<button class="key" type="button">4</button>
+			<button class="key" type="button">5</button>
+			<button class="key" type="button">6</button>
+			<button class="key operator" type="button">−</button>
+
+			<button class="key" type="button">1</button>
+			<button class="key" type="button">2</button>
+			<button class="key" type="button">3</button>
+			<button class="key operator" type="button">+</button>
+
+			<button class="key span-2" type="button">0</button>
+			<button class="key" type="button">.</button>
+			<button class="key operator" type="button">=</button>
+		</section>
+	</main>
+</body>
+</html>

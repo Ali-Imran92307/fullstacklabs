@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BSCS-V-A Timetable</title>
+	<style>
+		:root {
+			--ink: #111;
+			--line: #555;
+			--paper: #fff;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			padding: 18px 18px 24px;
+			color: var(--ink);
+			background: var(--paper);
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		.schedule {
+			width: min(100%, 1120px);
+			margin: 0 auto;
+		}
+
+		h1 {
+			margin: 0 0 2px;
+			text-align: center;
+			font-size: clamp(30px, 4vw, 46px);
+			font-weight: 400;
+			line-height: 1.08;
+		}
+
+		.university {
+			margin: 0 0 2px;
+			font-size: 13px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			table-layout: fixed;
+			border: 2px solid var(--line);
+			font-size: 12px;
+		}
+
+		col.day-column {
+			width: 10%;
+		}
+
+		th,
+		td {
+			border: 1px solid #777;
+			padding: 0;
+			text-align: center;
+			vertical-align: middle;
+			overflow: hidden;
+		}
+
+		thead th {
+			height: 66px;
+			font-weight: 400;
+			font-size: 11px;
+			line-height: 1.25;
+		}
+
+		thead th:first-child {
+			background: #fff;
+		}
+
+		.slot-name,
+		.slot-short {
+			display: block;
+			white-space: nowrap;
+		}
+
+		.slot-name {
+			font-size: 11px;
+		}
+
+		.slot-short {
+			margin-top: 10px;
+			font-size: 9px;
+		}
+
+		tbody tr {
+			height: 122px;
+		}
+
+		.day {
+			font-size: clamp(29px, 4vw, 46px);
+			font-weight: 400;
+		}
+
+		.class {
+			height: 100%;
+			min-height: 92px;
+			padding: 7px 4px 5px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			line-height: 1.1;
+		}
+
+		.teacher {
+			align-self: stretch;
+			min-height: 24px;
+			font-size: 8px;
+			line-height: 1.1;
+		}
+
+		.subject {
+			max-width: 100%;
+			font-size: 12px;
+			font-weight: 700;
+			line-height: 1.12;
+		}
+
+		.room {
+			align-self: stretch;
+			font-size: 12px;
+			line-height: 1.05;
+		}
+
+		.lab {
+			min-height: 92px;
+			justify-content: center;
+			gap: 16px;
+		}
+
+		.lab .teacher,
+		.lab .room {
+			min-height: auto;
+			font-size: 13px;
+		}
+
+		.lab .subject {
+			font-size: 15px;
+			font-weight: 400;
+		}
+
+		.empty {
+			background: #fff;
+		}
+
+		@media (max-width: 720px) {
+			body {
+				padding: 12px 8px 18px;
+			}
+
+			.schedule {
+				min-width: 760px;
+			}
+
+			body {
+				overflow-x: auto;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="schedule">
+		<h1>BSCS-V-A (Shift-I)</h1>
+		<p class="university">Air Uni</p>
+
+		<table aria-label="BSCS-V-A Shift-I class timetable">
+			<colgroup>
+				<col class="day-column">
+				<col span="9">
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col"><span class="slot-name">08:00am-09:00am</span><span class="slot-short">8:00 - 9:00</span></th>
+					<th scope="col"><span class="slot-name">09:00am-10:00am</span><span class="slot-short">9:00 - 10:00</span></th>
+					<th scope="col"><span class="slot-name">10:00am-11:00am</span><span class="slot-short">10:00 - 11:00</span></th>
+					<th scope="col"><span class="slot-name">11:00am-12:00pm</span><span class="slot-short">11:00 - 12:00</span></th>
+					<th scope="col"><span class="slot-name">12:00pm-01:00pm</span><span class="slot-short">12:00 - 1:00</span></th>
+					<th scope="col"><span class="slot-name">01:00pm-02:00pm</span><span class="slot-short">1:00 - 2:00</span></th>
+					<th scope="col"><span class="slot-name">02:00pm-03:00pm</span><span class="slot-short">2:00 - 3:00</span></th>
+					<th scope="col"><span class="slot-name">03:00pm-04:00pm</span><span class="slot-short">3:00 - 4:00</span></th>
+					<th scope="col"><span class="slot-name">04:00pm-05:00pm</span><span class="slot-short">4:00 - 5:00</span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th class="day" scope="row">Mo</th>
+					<td><div class="class"><div class="teacher">CS-Ms Maryam Wardah</div><div class="subject">Artificial<br>Intelligence</div><div class="room">C-205 (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">CS-Ms Warda Aslam<br>CS-Ms Eman Fatima</div><div class="subject">Operating<br>Systems</div><div class="room">Lecture Hall 01</div></div></td>
+					<td><div class="class"><div class="teacher">CS-Mr Muhammad Junaid<br>Nazar</div><div class="subject">Design and<br>Analysis of<br>Algorithms</div><div class="room">C-202 (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">Maths-Dr Waqas Sarwar<br>Abbasi</div><div class="subject">Linear Algebra</div><div class="room">C-301 (Shift-I)</div></div></td>
+					<td class="empty"></td>
+					<td><div class="class"><div class="teacher">AUSOM-Ms Ayesha<br>Munir-VFM</div><div class="subject">Introduction to<br>Management</div><div class="room">C-303 (Shift-I)</div></div></td>
+					<td colspan="3" class="empty"></td>
+				</tr>
+
+				<tr>
+					<th class="day" scope="row">Tu</th>
+					<td colspan="4"><div class="class lab"><div class="teacher">CS-Ms Maryam Wardah</div><div class="subject">Artificial Intelligence Lab</div><div class="room">Lab 5 A Block (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">Maths-Dr Waqas Sarwar<br>Abbasi</div><div class="subject">Linear Algebra</div><div class="room">C-203 (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">CS-Mr Muhammad Junaid<br>Nazar</div><div class="subject">Design and<br>Analysis of<br>Algorithms</div><div class="room">C-302 (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">CS-Ms Warda Aslam<br>CS-Ms Eman Fatima</div><div class="subject">Operating<br>Systems</div><div class="room">Lecture Hall 01</div></div></td>
+					<td colspan="2" class="empty"></td>
+				</tr>
+
+				<tr>
+					<th class="day" scope="row">We</th>
+					<td><div class="class"><div class="teacher">CS-Mr Muhammad Junaid<br>Nazar</div><div class="subject">Design and<br>Analysis of<br>Algorithms</div><div class="room">C-302 (Shift-I)</div></div></td>
+					  <td colspan="2" class="empty"></td>
+					<td colspan="3"><div class="class lab"><div class="teacher">CS-Ms Warda Aslam</div><div class="subject">Operating Systems Lab</div><div class="room">Lab 13 C Block (3rd Floor) (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">CS-Mr Hafiz Obiad Ullah<br>Khan / CS-Mr Azim Ali<br>Fayyaz</div><div class="subject">Full Stack Web<br>Development</div><div class="room">Lecture Hall 01<br>C-206 (Shift-I)</div></div></td>
+					<td colspan="2" class="empty"></td>
+				</tr>
+
+				<tr>
+					<th class="day" scope="row">Th</th>
+					<td class="empty"></td>
+					<td><div class="class"><div class="teacher">CS-Ms Maryam Wardah</div><div class="subject">Artificial<br>Intelligence</div><div class="room">C-202 (Shift-I)</div></div></td>
+					<td colspan="3"><div class="class lab"><div class="teacher">CS-Mr Hafiz Obiad Ullah Khan</div><div class="subject">Full Stack Web Development Lab</div><div class="room">Lab 5 A Block (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">CS-Mr Hafiz Obiad Ullah<br>Khan / CS-Mr Azim Ali<br>Fayyaz</div><div class="subject">Full Stack Web<br>Development</div><div class="room">Lecture Hall 01<br>C-306 (Shift-I)</div></div></td>
+					<td colspan="3" class="empty"></td>
+				</tr>
+
+				<tr>
+					<th class="day" scope="row">Fr</th>
+					<td colspan="2" class="empty"></td>
+					<td><div class="class"><div class="teacher">AUSOM-Ms Ayesha<br>Munir-VFM</div><div class="subject">Introduction to<br>Management</div><div class="room">C-302 (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">Maths-Dr Waqas Sarwar<br>Abbasi</div><div class="subject">Linear Algebra</div><div class="room">C-301 (Shift-I)</div></div></td>
+					<td><div class="class"><div class="teacher">CS-Ms Eman Fatima</div><div class="subject">Advisory Class</div><div class="room">C-202 (Shift-I)</div></div></td>
+					<td colspan="4" class="empty"></td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+</html>
