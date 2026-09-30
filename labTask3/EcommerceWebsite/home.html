@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Atelier | Thoughtful goods for everyday living</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+	<style>
+		:root { --ink: #17211b; --sage: #dce8dc; --green: #315842; --coral: #e9785d; --cream: #f8f6f0; }
+		body { color: var(--ink); background: var(--cream); font-family: 'DM Sans', sans-serif; }
+		.serif { font-family: 'Playfair Display', serif; }
+		.navbar { background: rgba(248,246,240,.94); backdrop-filter: blur(12px); }
+		.brand-mark { color: var(--green); letter-spacing: .08em; font-size: .78rem; font-weight: 700; }
+		.hero { min-height: 610px; background: var(--sage); overflow: hidden; }
+		.hero-copy { padding: 7rem 0 5rem; }
+		.hero h1 { font-size: clamp(3rem, 6vw, 5.7rem); line-height: .99; letter-spacing: -.04em; }
+		.hero-art { min-height: 610px; background: url('https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=85') center/cover; }
+		.eyebrow { color: var(--coral); font-size: .76rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+		.btn-dark { background: var(--ink); border-color: var(--ink); }
+		.btn-dark:hover { background: var(--green); border-color: var(--green); }
+		.section-space { padding: 6rem 0; }
+		.product-card { border: 0; background: transparent; transition: transform .25s ease; }
+		.product-card:hover { transform: translateY(-5px); }
+		.product-image { aspect-ratio: 1 / 1.05; object-fit: cover; background: #e7e6de; }
+		.price { color: var(--green); font-weight: 700; }
+		.category-pill { border: 1px solid #cfd6cc; color: #526157; background: transparent; }
+		.category-pill.active, .category-pill:hover { color: white; background: var(--green); border-color: var(--green); }
+		.review-band { background: var(--green); color: white; }
+		.review-card { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); }
+		.footer { background: var(--ink); color: #dbe3dc; }
+		.footer a { color: #dbe3dc; text-decoration: none; }
+		.cart-thumb { width: 64px; height: 64px; object-fit: cover; }
+		.offcanvas { background: var(--cream); }
+		.toast-container { z-index: 1090; }
+		.form-control, .form-select { border-color: #ccd4c9; padding: .7rem .85rem; }
+		.form-control:focus, .form-select:focus { border-color: var(--green); box-shadow: 0 0 0 .2rem rgba(49,88,66,.15); }
+		.stat { border-left: 2px solid var(--coral); padding-left: 1rem; }
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg sticky-top border-bottom">
+		<div class="container py-2">
+			<a class="navbar-brand d-flex align-items-center gap-2" href="#home"><span class="brand-mark">ATELIER</span><span class="small text-secondary">/ GOODS</span></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav mx-auto gap-lg-3">
+					<li class="nav-item"><a class="nav-link" href="#shop">Shop</a></li>
+					<li class="nav-item"><a class="nav-link" href="#story">Our story</a></li>
+					<li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+					<li class="nav-item"><a class="nav-link" href="#sell">Sell with us</a></li>
+				</ul>
+				<div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+					<button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#authModal">Log in</button>
+					<button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#authModal" data-auth-tab="signup">Sign up</button>
+					<button class="btn btn-sm position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-label="Open shopping cart">Cart <span id="cartCount" class="badge rounded-pill text-bg-danger">0</span></button>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<main id="home">
+		<section class="hero">
+			<div class="container-fluid px-0"><div class="row g-0 align-items-stretch">
+				<div class="col-lg-6"><div class="hero-copy container"><p class="eyebrow">Objects with a point of view</p><h1 class="serif my-4">Make room for the good stuff.</h1><p class="lead col-xl-9 mb-4">Small-batch essentials, made by independent makers and chosen to last beyond the season.</p><a href="#shop" class="btn btn-dark btn-lg px-4">Explore the collection <span aria-hidden="true">&rarr;</span></a><div class="d-flex gap-5 mt-5"><div class="stat"><strong>48h</strong><br><small>dispatch time</small></div><div class="stat"><strong>4.9/5</strong><br><small>maker rated</small></div></div></div></div>
+				<div class="col-lg-6 hero-art" role="img" aria-label="Curated home objects on a table"></div>
+			</div></div>
+		</section>
+
+		<section id="shop" class="section-space"><div class="container">
+			<div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4"><div><p class="eyebrow">The edit</p><h2 class="serif display-5 mb-0">Find your everyday favorite.</h2></div><button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#productModal">+ Add a product</button></div>
+			<div class="d-flex gap-2 flex-wrap mb-4" id="categoryFilters"><button class="btn btn-sm category-pill active" data-filter="all">All pieces</button><button class="btn btn-sm category-pill" data-filter="home">Home</button><button class="btn btn-sm category-pill" data-filter="wear">Wear</button><button class="btn btn-sm category-pill" data-filter="paper">Paper &amp; gifts</button></div>
+			<div class="row g-4" id="productGrid"></div>
+		</div></section>
+
+		<section id="story" class="section-space border-top"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-5"><p class="eyebrow">Why Atelier</p><h2 class="serif display-5">Less stuff. More meaning.</h2></div><div class="col-lg-6 ms-auto"><p class="lead">We believe shopping can be a vote for considered design, fair work, and the pleasure of using something beautiful every day.</p><p class="text-secondary mb-0">Every item is selected for its story, its material, and the people behind it. No endless scroll required.</p></div></div></div></section>
+
+		<section id="reviews" class="review-band section-space"><div class="container"><div class="row mb-5 align-items-end"><div class="col"><p class="eyebrow text-warning">Kind words</p><h2 class="serif display-5">Loved by good company.</h2></div><div class="col-auto"><span class="fs-4">★★★★★</span><small class="d-block opacity-75">4.9 average from 380+ reviews</small></div></div><div class="row g-3"><div class="col-md-4"><div class="review-card rounded-3 p-4 h-100"><div class="text-warning mb-3">★★★★★</div><p>“The quality is even better in person. My new favorite corner of the house.”</p><small class="opacity-75">— Maya R., verified buyer</small></div></div><div class="col-md-4"><div class="review-card rounded-3 p-4 h-100"><div class="text-warning mb-3">★★★★★</div><p>“Beautifully packed, quickly shipped, and the maker's note was such a lovely touch.”</p><small class="opacity-75">— Daniel K., verified buyer</small></div></div><div class="col-md-4"><div class="review-card rounded-3 p-4 h-100"><div class="text-warning mb-3">★★★★★</div><p>“Finally a store where I can find gifts that don't feel like an afterthought.”</p><small class="opacity-75">— Priya S., verified buyer</small></div></div></div></div></section>
+
+		<section id="sell" class="section-space"><div class="container"><div class="p-4 p-md-5 rounded-3" style="background:#f0dfd3"><div class="row align-items-center g-4"><div class="col-lg-8"><p class="eyebrow">For independent makers</p><h2 class="serif display-6">Have something worth sharing?</h2><p class="mb-0">Join our small community of thoughtful makers. Add your first product and let the right people find it.</p></div><div class="col-lg-4 text-lg-end"><button class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#productModal">Add a product &rarr;</button></div></div></div></div></section>
+	</main>
+
+	<footer class="footer py-5"><div class="container"><div class="row g-4"><div class="col-md-5"><span class="brand-mark text-white">ATELIER</span><p class="mt-3 mb-0 opacity-75">Considered goods for the way you live.</p></div><div class="col-6 col-md-3"><small class="text-uppercase opacity-50">Explore</small><div class="d-grid gap-2 mt-2"><a href="#shop">Shop all</a><a href="#story">Our story</a><a href="#reviews">Reviews</a></div></div><div class="col-6 col-md-4"><small class="text-uppercase opacity-50">Stay in the loop</small><form class="input-group mt-2" id="newsletterForm"><input type="email" class="form-control" placeholder="Your email" required><button class="btn btn-light" type="submit">Join</button></form></div></div><hr class="opacity-25 my-4"><small class="opacity-50">&copy; 2026 Atelier Goods. Made with intention.</small></div></footer>
+
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="cartCanvas" aria-labelledby="cartTitle"><div class="offcanvas-header border-bottom"><h5 id="cartTitle" class="serif mb-0">Your cart <span id="cartTitleCount" class="text-secondary fs-6"></span></h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div><div class="offcanvas-body d-flex flex-column"><div id="cartItems" class="flex-grow-1"></div><div class="border-top pt-3"><div class="d-flex justify-content-between mb-3"><span>Subtotal</span><strong id="cartTotal">$0.00</strong></div><button id="checkoutButton" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#checkoutModal">Checkout <span aria-hidden="true">&rarr;</span></button></div></div></div>
+
+	<div class="modal fade" id="authModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0"><div class="modal-header"><h5 class="modal-title serif" id="authTitle">Welcome back</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><ul class="nav nav-pills nav-fill mb-4"><li class="nav-item"><button class="nav-link active" data-auth-view="login">Log in</button></li><li class="nav-item"><button class="nav-link" data-auth-view="signup">Sign up</button></li></ul><form id="authForm"><div id="nameField" class="mb-3 d-none"><label class="form-label">Full name</label><input type="text" class="form-control" placeholder="Alex Morgan"></div><div class="mb-3"><label class="form-label">Email address</label><input type="email" class="form-control" placeholder="you@example.com" required></div><div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" placeholder="At least 8 characters" required></div><button class="btn btn-dark w-100" type="submit" id="authSubmit">Log in</button></form></div></div></div></div>
+
+	<div class="modal fade" id="productModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0"><div class="modal-header"><h5 class="modal-title serif">Add a product</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><form id="productForm"><div class="modal-body"><div class="mb-3"><label class="form-label">Product name</label><input id="newProductName" class="form-control" required></div><div class="row g-3"><div class="col-6"><label class="form-label">Price ($)</label><input id="newProductPrice" type="number" min="1" step=".01" class="form-control" required></div><div class="col-6"><label class="form-label">Category</label><select id="newProductCategory" class="form-select"><option value="home">Home</option><option value="wear">Wear</option><option value="paper">Paper &amp; gifts</option></select></div></div><div class="mt-3"><label class="form-label">Image URL <span class="text-secondary">(optional)</span></label><input id="newProductImage" type="url" class="form-control" placeholder="https://..."></div></div><div class="modal-footer"><button type="submit" class="btn btn-dark">Publish product</button></div></form></div></div></div>
+
+	<div class="modal fade" id="checkoutModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0"><div class="modal-header"><h5 class="modal-title serif">Ready when you are</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><form id="checkoutForm"><div class="modal-body"><div class="alert alert-success py-2 small">Free shipping on this order.</div><div class="mb-3"><label class="form-label">Delivery address</label><input class="form-control" required placeholder="24 Garden Street"></div><div class="row g-3"><div class="col-7"><label class="form-label">Card number</label><input class="form-control" inputmode="numeric" required placeholder="4242 4242 4242 4242"></div><div class="col-5"><label class="form-label">Expiry / CVC</label><input class="form-control" required placeholder="09/28 · 123"></div></div></div><div class="modal-footer"><button type="submit" class="btn btn-dark w-100">Place order <span id="checkoutTotal"></span></button></div></form></div></div></div>
+
+	<div class="toast-container position-fixed bottom-0 end-0 p-3"><div id="siteToast" class="toast" role="alert"><div class="toast-body" id="toastMessage">Done.</div></div></div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		const products = [
+			{ id: 1, name: 'Cedar incense holder', category: 'home', price: 34, image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=80' },
+			{ id: 2, name: 'Linen market tote', category: 'wear', price: 42, image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=700&q=80' },
+			{ id: 3, name: 'Sienna ceramic mug', category: 'home', price: 28, image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=700&q=80' },
+			{ id: 4, name: 'The Sunday notebook', category: 'paper', price: 18, image: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=700&q=80' },
+			{ id: 5, name: 'Everyday wool cap', category: 'wear', price: 36, image: 'https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=700&q=80' },
+			{ id: 6, name: 'Wildflower print', category: 'paper', price: 24, image: 'https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=700&q=80' }
+		];
+		let cart = [];
+		const money = value => `$${value.toFixed(2)}`;
+		const categoryName = category => ({ home: 'Home', wear: 'Wear', paper: 'Paper & gifts' })[category];
+		function showToast(message) { document.getElementById('toastMessage').textContent = message; bootstrap.Toast.getOrCreateInstance(document.getElementById('siteToast')).show(); }
+		function renderProducts(filter = 'all') { document.getElementById('productGrid').innerHTML = products.filter(p => filter === 'all' || p.category === filter).map(p => `<div class="col-sm-6 col-lg-4 product-item" data-category="${p.category}"><article class="product-card"><div class="position-relative"><img class="product-image w-100 rounded-3" src="${p.image}" alt="${p.name}"><button class="btn btn-light position-absolute bottom-0 end-0 m-3 rounded-circle shadow-sm" onclick="addToCart(${p.id})" aria-label="Add ${p.name} to cart">+</button></div><div class="d-flex justify-content-between gap-2 mt-3"><div><small class="text-secondary">${categoryName(p.category)}</small><h5 class="mt-1 mb-0">${p.name}</h5></div><span class="price">${money(p.price)}</span></div></article></div>`).join(''); }
+		function addToCart(id) { const item = cart.find(entry => entry.id === id); item ? item.quantity++ : cart.push({ id, quantity: 1 }); renderCart(); showToast('Added to your cart.'); }
+		function updateQuantity(id, change) { const item = cart.find(entry => entry.id === id); if (!item) return; item.quantity += change; if (item.quantity < 1) cart = cart.filter(entry => entry.id !== id); renderCart(); }
+		function removeFromCart(id) { cart = cart.filter(entry => entry.id !== id); renderCart(); }
+		function renderCart() { const count = cart.reduce((sum, item) => sum + item.quantity, 0); const total = cart.reduce((sum, item) => { const product = products.find(p => p.id === item.id); return sum + product.price * item.quantity; }, 0); document.getElementById('cartCount').textContent = count; document.getElementById('cartTitleCount').textContent = count ? `(${count})` : ''; document.getElementById('cartTotal').textContent = money(total); document.getElementById('checkoutTotal').textContent = total ? money(total) : ''; document.getElementById('checkoutButton').disabled = !count; document.getElementById('cartItems').innerHTML = count ? cart.map(item => { const p = products.find(product => product.id === item.id); return `<div class="d-flex gap-3 mb-4"><img src="${p.image}" class="cart-thumb rounded-2" alt="${p.name}"><div class="flex-grow-1"><div class="d-flex justify-content-between"><strong>${p.name}</strong><button class="btn btn-sm text-secondary p-0" onclick="removeFromCart(${p.id})" aria-label="Remove ${p.name}">Remove</button></div><small class="text-secondary">${money(p.price)}</small><div class="input-group input-group-sm mt-2" style="max-width:110px"><button class="btn btn-outline-secondary" onclick="updateQuantity(${p.id}, -1)">-</button><span class="input-group-text bg-white flex-grow-1 justify-content-center">${item.quantity}</span><button class="btn btn-outline-secondary" onclick="updateQuantity(${p.id}, 1)">+</button></div></div></div>`; }).join('') : '<div class="text-center text-secondary py-5"><p class="fs-1 mb-2">○</p><p>Your cart is waiting for something lovely.</p><a href="#shop" data-bs-dismiss="offcanvas">Browse the edit</a></div>'; }
+		document.getElementById('categoryFilters').addEventListener('click', event => { const button = event.target.closest('[data-filter]'); if (!button) return; document.querySelectorAll('[data-filter]').forEach(el => el.classList.remove('active')); button.classList.add('active'); renderProducts(button.dataset.filter); });
+		document.querySelectorAll('[data-auth-view]').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('[data-auth-view]').forEach(el => el.classList.remove('active')); button.classList.add('active'); const signup = button.dataset.authView === 'signup'; document.getElementById('authTitle').textContent = signup ? 'Create your account' : 'Welcome back'; document.getElementById('nameField').classList.toggle('d-none', !signup); document.getElementById('authSubmit').textContent = signup ? 'Create account' : 'Log in'; }));
+		document.querySelectorAll('[data-auth-tab]').forEach(button => button.addEventListener('click', () => document.querySelector('[data-auth-view="signup"]').click()));
+		document.getElementById('authForm').addEventListener('submit', event => { event.preventDefault(); bootstrap.Modal.getInstance(document.getElementById('authModal')).hide(); showToast('You are all set. Welcome to Atelier.'); });
+		document.getElementById('productForm').addEventListener('submit', event => { event.preventDefault(); const nextId = Math.max(...products.map(p => p.id)) + 1; products.push({ id: nextId, name: document.getElementById('newProductName').value, category: document.getElementById('newProductCategory').value, price: Number(document.getElementById('newProductPrice').value), image: document.getElementById('newProductImage').value || 'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=700&q=80' }); renderProducts(); event.target.reset(); bootstrap.Modal.getInstance(document.getElementById('productModal')).hide(); showToast('Product published to the collection.'); });
+		document.getElementById('checkoutForm').addEventListener('submit', event => { event.preventDefault(); cart = []; renderCart(); bootstrap.Modal.getInstance(document.getElementById('checkoutModal')).hide(); bootstrap.Offcanvas.getInstance(document.getElementById('cartCanvas')).hide(); event.target.reset(); showToast('Order placed. Thank you for shopping thoughtfully.'); });
+		document.getElementById('newsletterForm').addEventListener('submit', event => { event.preventDefault(); event.target.reset(); showToast('You are on the list.'); });
+		renderProducts(); renderCart();
+	</script>
+</body>
+</html>
